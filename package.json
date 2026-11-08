@@ -1,0 +1,29 @@
+{
+  "name": "steam-hours",
+  "version": "1.0.0",
+  "description": "Self-hosted Steam session manager with QR login and private per-user accounts",
+  "scripts": {
+    "start": "node --env-file-if-exists=.env src/server.js",
+    "test": "node --test",
+    "setup": "node scripts/setup.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "express": "^5.3.0",
+    "express-rate-limit": "^8.7.3",
+    "helmet": "^8.3.0",
+    "qrcode": "^1.5.4",
+    "steam-session": "^1.9.4",
+    "steam-user": "^5.3.0"
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "overrides": {
+    "adm-zip": "^0.6.1",
+    "protobufjs": "^7.6.6"
+  }
+}

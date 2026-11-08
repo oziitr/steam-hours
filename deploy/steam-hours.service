@@ -1,0 +1,25 @@
+[Unit]
+Description=Steam Hours web panel and session workers
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=steam-hours
+Group=steam-hours
+WorkingDirectory=/opt/steam-hours
+EnvironmentFile=/opt/steam-hours/.env
+ExecStart=/opt/plesk/node/24/bin/node src/server.js
+Restart=on-failure
+RestartSec=10
+TimeoutStopSec=15
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/steam-hours/data
+UMask=0077
+MemoryMax=512M
+
+[Install]
+WantedBy=multi-user.target

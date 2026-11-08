@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="tr">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light"><title>Steam Hours — Hesap paneli</title><link rel="stylesheet" href="./style.css"><script src="./app.js" defer></script></head>
+<body>
+<header><a class="brand" href="./" aria-label="Steam Hours ana sayfa"><span class="mark">sh</span>Steam Hours</a><div id="userbar" hidden><span id="username"></span><button id="logout" class="quiet">Çıkış yap</button></div><span id="private-label">Kendi sunucun. Kendi hesapların.</span></header>
+<main>
+<section id="auth" class="auth-layout">
+  <div class="intro"><span class="tag">Steam oturum paneli</span><h1>Oyunlar beklesin.<br>Oturumun açık kalsın.</h1><p>Hesabını bağla, oyununu seç, oturumunu sunucudan yönet. Bilgisayarına oyun indirmen gerekmez.</p><div class="illustration" aria-hidden="true"><div class="disc"></div><div class="ticket"><span>Counter-Strike 2</span><strong>730</strong><span>Steam App ID</span></div></div><p class="small">Steam veya Valve ile bağlantılı resmî bir hizmet değildir.</p></div>
+  <div class="auth-box"><div class="tabs"><button id="login-tab" class="selected" type="button">Giriş yap</button><button id="register-tab" type="button">Hesap oluştur</button></div><h2 id="auth-title">Paneline hoş geldin.</h2><p>Burada panel hesabını kullan. Steam hesabını içeride QR ile bağlayacaksın.</p><form id="auth-form"><label>Kullanıcı adı<input name="name" autocomplete="username" required pattern="[a-zA-Z0-9_-]{3,32}" minlength="3" maxlength="32" placeholder="kullanici_adin"></label><label>Panel şifresi<input name="password" type="password" autocomplete="current-password" required minlength="12" maxlength="128" placeholder="En az 12 karakter"></label><label id="invite-field" hidden>Davet kodu<input name="invite" autocomplete="off" placeholder="Sunucu sahibinden aldığın kod"></label><button class="primary" id="auth-submit">Giriş yap</button></form><p class="small">Steam şifren bu panele girilmez.</p></div>
+</section>
+<section id="dashboard" hidden>
+  <div class="heading"><div><span class="tag">Çalışma alanın</span><h1>Steam hesapların.</h1><p>Oturumları tek yerden başlat, durdur ve takip et.</p></div><button id="add-account" class="primary">+ Steam hesabı bağla</button></div>
+  <div class="overview"><div><span>Bağlı hesap</span><strong id="count">0</strong></div><div><span>Etkin oturum</span><strong id="active">0</strong></div><div><span>Panelde ölçülen süre</span><strong id="hours">0,0 sa</strong></div></div>
+  <div class="table-heading"><h2>Oturum yönetimi</h2><span id="sync-state">Güncel</span></div>
+  <div id="empty"><span class="empty-symbol">+</span><h3>İlk hesabını bağla.</h3><p>Steam mobil uygulamasından QR kodunu onayla.<br>Ardından CS2 veya başka bir oyun için oturum başlat.</p><button id="empty-add">Steam hesabı bağla</button></div>
+  <div id="accounts"></div>
+  <aside class="note"><strong>Süre nasıl ölçülüyor?</strong><p>Buradaki sayaç, panelin etkin Steam bağlantısında geçirdiği süreyi gösterir; Steam profilindeki doğrulanmış toplam oyun süresi değildir. Başka cihazda oyun açıldığında oturum duraklar. Yalnızca hesabında erişebildiğin oyunları seç.</p></aside>
+</section>
+</main>
+<footer><span>Steam Hours</span><span>Sunucunda çalışan kişisel oturum yöneticisi</span></footer>
+<dialog id="qr-dialog"><div class="dialog-heading"><h2>Steam hesabını bağla</h2><button id="close-qr" class="quiet" aria-label="Kapat">✕</button></div><p>Steam mobil uygulamasında Steam Guard’ı açıp kodu tara. Yalnızca kendi hesabını onayla.</p><div id="qr-content"><p>QR kodu hazırlanıyor…</p></div><p id="qr-status" role="status"></p><p class="small">Onay, bu sunucuya Steam istemcisi oturumu açma yetkisi verir. Oturum anahtarı sunucuda şifreli saklanır.</p><button id="retry-qr" hidden>Yeni QR oluştur</button></dialog>
+<div id="notice" role="status" hidden></div>
+</body></html>
