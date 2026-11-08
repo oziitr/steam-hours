@@ -12,6 +12,11 @@ export function createApp({ store, workers, origin, invite, makeLogin = () => ne
   const app = express(), sessions = new Map(), pending = new Map();
   const secure = new URL(origin).protocol === 'https:';
   app.disable('x-powered-by');
+  app.use((req, res, next) => {
+    res.set('X-Robots-Tag', 'noindex, nofollow, noarchive, nosnippet');
+    next();
+  });
+  app.get('/robots.txt', (req, res) => res.type('text/plain').send('User-agent: *\nDisallow: /\n'));
   app.use(helmet({ contentSecurityPolicy: { directives: { 'img-src': ["'self'", 'data:'], 'upgrade-insecure-requests': secure ? [] : null } }, strictTransportSecurity: secure ? undefined : false }));
   app.use(express.json({ limit: '8kb' }));
   app.use('/api', (req, res, next) => {

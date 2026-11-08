@@ -37,6 +37,12 @@ npm start
 
 Ters vekil X-Forwarded-For güveni varsayılan olarak kapalıdır. Bu yüzden giriş/QR hız sınırı tek vekilin arkasındaki kullanıcılar için ortaktır. Küçük, davetli kişisel kurulum için tasarlanmıştır; büyük ve herkese açık bir SaaS hizmeti değildir. Tek Node süreci kullan: SQLite verisi kalıcı, web oturumları bellektedir; servis yeniden başlayınca panele tekrar giriş gerekir.
 
+### Parola korumalı ayrı subdomain
+
+Plesk üzerinde ayrı subdomain kullanıyorsan ek Nginx yönergeleri için `deploy/nginx-subdomain.conf` şablonunu kullan. `/etc/nginx/steam-hours.htpasswd` dosyasını `htpasswd -cB` ile oluştur; dosyayı Nginx'in okuyabildiği, diğer kullanıcıların yazamadığı izinlerle koru. `PUBLIC_ORIGIN` değerini yeni HTTPS origin ile eşleştir. Önceki alt yol yönlendirmesini kapat; aksi hâlde ek parola koruması eski adres üzerinden aşılabilir. DNS kaydı ve geçerli HTTPS yapılandırması ayrıca gerekir.
+
+Uygulama `X-Robots-Tag: noindex, nofollow, noarchive, nosnippet` ve taramaya kapalı `robots.txt` sunar. Bunlar arama motorlarına yönelik yönergelerdir, erişim kontrolü değildir. Genel DNS kayıtları ve geçmiş sertifika kayıtları gizlenemez. Mevcut wildcard sertifikası kullanmak subdomain adına özel yeni sertifika kaydı oluşturmayı önleyebilir; tam gizlilik için genel DNS yerine özel ağ gerekir.
+
 ## Test ve sınırlar
 
 ```sh
